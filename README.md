@@ -1,7 +1,8 @@
 # Demo of Kubernetes load balancing on NodePort
 
 We are using kubespray v2.4.0 to build Kubernetes clusters and they use iptables method
-for kube-proxy.  Apparently, this does not support true round robin load balancing.
+for [kube-proxy](https://github.com/kubernetes-sigs/kubespray/blob/v2.4.0/roles/kubernetes/node/defaults/main.yml#L17).
+Apparently, this does not support true round robin load balancing.
 
 But to prove or disprove this, we have a demo.
 
