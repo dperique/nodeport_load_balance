@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: dp-server
+spec:
+  replicas: 2
+  strategy: {}
+  template:
+    metadata:
+      name: dp-server
+      labels:
+        app: dp-server
+    spec:
+      hostname: dp-server
+      containers:
+      - image: busybox
+        imagePullPolicy: Always
+        name: dp-server
+        command: [ "sleep", "999999" ]

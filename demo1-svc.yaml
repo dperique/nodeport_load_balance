@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo1
+  labels:
+    demo: demo1
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 8888
+      targetPort: 8888
+      protocol: TCP
+      nodePort: 30090
+  selector:
+    app: dp-server
