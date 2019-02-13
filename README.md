@@ -61,20 +61,13 @@ $ kubectl apply -f dp-deployment.yaml
 ```
 
 We go to two separate terminals and do this on terminal 1 (note the first pod
-shows "AAAAAAA" and the second shows "BBBBBB" to help distinguish):
+shows "AAAAAAAA" and the second shows "BBBBBBB" to help distinguish):
 
 ```
 $ m1=$(kubectl get po | grep dp-server | head -1 | cut -f 1 -d ' ')
 $ kubectl exec -ti $m1 -- sh
 # cat << END > index.html
-> <html>
->   <head>
->     <title>Test Connectivity pod AAAAAAA ***********</title>
->   </head>
->   <body>
->     <p>You can see me</p>
->   </body>
-> </html>
+> <html><head><title>Test Connectivity pod AAAAAAA ***********</title></head></html>
 > END
 # while [ 1 ]; do nc -l -p 8888 < index.html ; done
 ```
@@ -85,15 +78,7 @@ We do this on terminal 2:
 $ m2=$(kubectl get po | grep dp-server | tail -1 | cut -f 1 -d ' ')
 $ kubectl exec -ti $m2 -- sh
 / # cat << END > index.html
-> cat index.html 
-> <html>
->   <head>
->     <title>Test Connectivity pod BBBBBBBB ***********</title>
->   </head>
->   <body>
->     <p>You can see me</p>
->   </body>
-> </html>
+> <html><head><title>Test Connectivity pod BBBBBBB ***********</title></head></html>
 > END
 / # while [ 1 ]; do nc -l -p 8888 < index.html ; done
 
