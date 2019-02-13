@@ -87,3 +87,32 @@ $ kubectl exec -ti $m2 -- sh
 The above creates a simple webserver and returns output so that we can
 run curl and easily identify what pod got the request.
 
+Here's a sample run using one of the IPs on the k8s cluster (using nodePort, you can
+run the curl on any node IP on the k8s cluster):
+
+```
+$ anIP=x.x.x.x
+$ for i in {1..20} ; do curl http://$anIP:30090 ; done
+<html><head><title>Test Connectivity pod BBBBBBBB ***********</title></head></html>
+<html><head><title>Test Connectivity pod BBBBBBBB ***********</title></head></html>
+<html><head><title>Test Connectivity pod AAAAAAA ***********</title></head></html>
+<html><head><title>Test Connectivity pod AAAAAAA ***********</title></head></html>
+<html><head><title>Test Connectivity pod AAAAAAA ***********</title></head></html>
+<html><head><title>Test Connectivity pod AAAAAAA ***********</title></head></html>
+<html><head><title>Test Connectivity pod BBBBBBBB ***********</title></head></html>
+<html><head><title>Test Connectivity pod BBBBBBBB ***********</title></head></html>
+<html><head><title>Test Connectivity pod BBBBBBBB ***********</title></head></html>
+<html><head><title>Test Connectivity pod BBBBBBBB ***********</title></head></html>
+<html><head><title>Test Connectivity pod AAAAAAA ***********</title></head></html>
+<html><head><title>Test Connectivity pod AAAAAAA ***********</title></head></html>
+<html><head><title>Test Connectivity pod AAAAAAA ***********</title></head></html>
+<html><head><title>Test Connectivity pod BBBBBBBB ***********</title></head></html>
+<html><head><title>Test Connectivity pod BBBBBBBB ***********</title></head></html>
+<html><head><title>Test Connectivity pod AAAAAAA ***********</title></head></html>
+<html><head><title>Test Connectivity pod AAAAAAA ***********</title></head></html>
+<html><head><title>Test Connectivity pod BBBBBBBB ***********</title></head></html>
+<html><head><title>Test Connectivity pod AAAAAAA ***********</title></head></html>
+<html><head><title>Test Connectivity pod AAAAAAA ***********</title></head></html>
+```
+
+Apparently, there is some level of "load balancing" on NodePort.
